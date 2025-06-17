@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductivityHub Pro - Advanced Task & Finance Manager</title>
+    <meta name="description" content="Professional productivity and finance management application with advanced task tracking, expense monitoring, and analytics.">
+    <meta name="keywords" content="productivity, task management, expense tracking, finance, analytics, dashboard">
+    <meta name="author" content="ProductivityHub Pro">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ProductivityHub Pro - Advanced Task & Finance Manager">
+    <meta property="og:description" content="Professional productivity and finance management application">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://productivityhub.pro">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ProductivityHub Pro">
+    <meta name="twitter:description" content="Advanced Task & Finance Manager">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="loading-text">ProductivityHub Pro</div>
+            <div class="loading-subtitle">Initializing your productivity workspace...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab" id="main-fab" aria-label="Quick Actions Menu">
+            <i class="fas fa-plus"></i>
+        </button>
+        <div class="fab-menu" role="menu">
+            <button class="fab-item" data-action="add-task" role="menuitem" aria-label="Add New Task">
+                <i class="fas fa-tasks"></i>
+                <span class="fab-tooltip">Add Task</span>
+            </button>
+            <button class="fab-item" data-action="add-expense" role="menuitem" aria-label="Add New Expense">
+                <i class="fas fa-dollar-sign"></i>
+                <span class="fab-tooltip">Add Expense</span>
+            </button>
+            <button class="fab-item" data-action="export-data" role="menuitem" aria-label="Export Data">
+                <i class="fas fa-download"></i>
+                <span class="fab-tooltip">Export Data</span>
+            </button>
+            <button class="fab-item" data-action="settings" role="menuitem" aria-label="Settings">
+                <i class="fas fa-cog"></i>
+                <span class="fab-tooltip">Settings</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main Navigation">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>ProductivityHub</h1>
+                    <span class="brand-subtitle">Pro</span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu" role="menubar">
+                <li role="none">
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard" role="menuitem" aria-current="page">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#tasks" class="nav-link" data-section="tasks" role="menuitem">
+                        <i class="fas fa-tasks"></i>
+                        <span>Tasks</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#expenses" class="nav-link" data-section="expenses" role="menuitem">
+                        <i class="fas fa-wallet"></i>
+                        <span>Expenses</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#analytics" class="nav-link" data-section="analytics" role="menuitem">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#reports" class="nav-link" data-section="reports" role="menuitem">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#contact" class="nav-link" data-section="contact" role="menuitem">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="notification-btn" id="notification-btn" aria-label="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notification-count">3</span>
+                </button>
+                <div class="user-menu">
+                    <img src="/avatar.jpg" 
+                         alt="User Avatar" class="user-avatar" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="user-dropdown" role="menu">
+                        <div class="user-info">
+                            <div class="user-name">Surekha Koti</div>
+                            <div class="user-email">surekhakoti305@gmail.com</div>
+                            <div class="user-status">
+                                <span class="status-indicator online"></span>
+                                Online
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" role="menuitem">
+                            <i class="fas fa-user"></i>
+                            Profile Settings
+                        </a>
+                        <a href="#" class="dropdown-item" role="menuitem">
+                            <i class="fas fa-cog"></i>
+                            Preferences
+                        </a>
+                        <a href="#" class="dropdown-item" role="menuitem">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy & Security
+                        </a>
+                        <a href="#" class="dropdown-item" role="menuitem">
+                            <i class="fas fa-question-circle"></i>
+                            Help & Support
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout" role="menuitem">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="hamburger" id="mobile-menu-toggle" aria-label="Toggle Mobile Menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="main-content" role="main">
+        <!-- Dashboard Overview Section -->
+        <section id="dashboard" class="section dashboard-section active" role="tabpanel" aria-labelledby="dashboard-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 id="dashboard-title" class="section-title">Dashboard Overview</h2>
+                        <p class="section-subtitle">Monitor your productivity and financial health in real-time</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn btn-outline" id="refresh-data" aria-label="Refresh Dashboard Data">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh
+                        </button>
+                        <div class="date-range-picker">
+                            <label for="date-range" class="sr-only">Select Date Range</label>
+                            <select id="date-range" aria-label="Date Range Filter">
+                                <option value="7">Last 7 days</option>
+                                <option value="30" selected>Last 30 days</option>
+                                <option value="90">Last 90 days</option>
+                                <option value="365">Last year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Stats Grid -->
+                <div class="stats-grid" role="region" aria-label="Key Performance Metrics">
+                    <div class="stat-card primary" role="article">
+                        <div class="stat-header">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-trend positive" aria-label="12% increase">
+                                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-tasks" class="stat-number">0</h3>
+                            <p class="stat-label">Total Tasks</p>
+                            <div class="stat-progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-fill" id="tasks-progress"></div>
+                                </div>
+                                <span class="progress-text" id="tasks-completion">0% completed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card success" role="article">
+                        <div class="stat-header">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-trend positive" aria-label="8% increase">
+                                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                                <span>+8%</span>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="completed-tasks" class="stat-number">0</h3>
+                            <p class="stat-label">Completed Today</p>
+                            <div class="stat-mini-chart">
+                                <canvas id="completion-chart" width="100" height="30" aria-label="Task completion trend chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card warning" role="article">
+                        <div class="stat-header">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-trend negative" aria-label="5% decrease">
+                                <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                                <span>-5%</span>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-expenses" class="stat-number">$0</h3>
+                            <p class="stat-label">Total Expenses</p>
+                            <div class="expense-breakdown">
+                                <div class="breakdown-item">
+                                    <span class="breakdown-category">Food</span>
+                                    <span class="breakdown-amount" id="food-expenses">$0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-category">Transport</span>
+                                    <span class="breakdown-amount" id="transport-expenses">$0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-category">Other</span>
+                                    <span class="breakdown-amount" id="other-expenses">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card info" role="article">
+                        <div class="stat-header">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="stat-trend neutral" aria-label="No change">
+                                <i class="fas fa-minus" aria-hidden="true"></i>
+                                <span>0%</span>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="this-month" class="stat-number">$0</h3>
+                            <p class="stat-label">This Month</p>
+                            <div class="budget-indicator">
+                                <div class="budget-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="2000">
+                                    <div class="budget-fill" id="budget-progress"></div>
+                                </div>
+                                <span class="budget-text">Budget: $2,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions" role="region" aria-label="Quick Actions">
+                    <h3 class="quick-actions-title">Quick Actions</h3>
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-card" data-action="add-task" aria-label="Add New Task">
+                            <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                            <span>Add Task</span>
+                        </button>
+                        <button class="quick-action-card" data-action="add-expense" aria-label="Log New Expense">
+                            <i class="fas fa-receipt" aria-hidden="true"></i>
+                            <span>Log Expense</span>
+                        </button>
+                        <button class="quick-action-card" data-action="view-reports" aria-label="View Detailed Reports">
+                            <i class="fas fa-chart-pie" aria-hidden="true"></i>
+                            <span>View Reports</span>
+                        </button>
+                        <button class="quick-action-card" data-action="export-data" aria-label="Export All Data">
+                            <i class="fas fa-download" aria-hidden="true"></i>
+                            <span>Export Data</span>
+                        </button>
+                        <button class="quick-action-card" data-action="set-goals" aria-label="Set Goals">
+                            <i class="fas fa-bullseye" aria-hidden="true"></i>
+                            <span>Set Goals</span>
+                        </button>
+                        <button class="quick-action-card" data-action="schedule-review" aria-label="Schedule Review">
+                            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                            <span>Schedule Review</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity" role="region" aria-label="Recent Activity">
+                    <h3 class="activity-title">Recent Activity</h3>
+                    <div class="activity-list" id="recent-activity-list">
+                        <!-- Activity items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Task Management Section -->
+        <section id="tasks" class="section tasks-section" role="tabpanel" aria-labelledby="tasks-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 id="tasks-title" class="section-title">Task Manager</h2>
+                        <p class="section-subtitle">Organize and track your daily tasks efficiently with advanced features</p>
+                    </div>
+                    <div class="section-actions">
+                        <div class="view-toggle" role="radiogroup" aria-label="Task View Options">
+                            <button class="view-btn active" data-view="list" role="radio" aria-checked="true" aria-label="List View">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button class="view-btn" data-view="grid" role="radio" aria-checked="false" aria-label="Grid View">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="kanban" role="radio" aria-checked="false" aria-label="Kanban View">
+                                <i class="fas fa-columns"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" id="add-task-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Task
+                        </button>
+                    </div>
+                </div>
+
+                <div class="task-manager">
+                    <!-- Advanced Task Input -->
+                    <div class="task-input-container" id="task-input-container">
+                        <form id="task-form" class="task-form" novalidate>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="task-input">Task Description *</label>
+                                    <input type="text" id="task-input" placeholder="What needs to be done?" required 
+                                           aria-describedby="task-input-error">
+                                    <span class="error-message" id="task-input-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-category">Category</label>
+                                    <select id="task-category">
+                                        <option value="work">💼 Work</option>
+                                        <option value="personal">👤 Personal</option>
+                                        <option value="health">🏥 Health</option>
+                                        <option value="learning">📚 Learning</option>
+                                        <option value="finance">💰 Finance</option>
+                                        <option value="home">🏠 Home</option>
+                                        <option value="social">👥 Social</option>
+                                        <option value="other">📦 Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-priority">Priority</label>
+                                    <select id="task-priority">
+                                        <option value="low">🟢 Low</option>
+                                        <option value="medium" selected>🟡 Medium</option>
+                                        <option value="high">🟠 High</option>
+                                        <option value="urgent">🔴 Urgent</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-due-date">Due Date</label>
+                                    <input type="datetime-local" id="task-due-date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-estimated-time">Estimated Time (minutes)</label>
+                                    <input type="number" id="task-estimated-time" placeholder="30" min="1" max="480">
+                                </div>
+                                <div class="form-group">
+                                    <label for="task-tags">Tags</label>
+                                    <input type="text" id="task-tags" placeholder="Add tags (comma separated)">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="task-notes">Notes (Optional)</label>
+                                    <textarea id="task-notes" placeholder="Additional details or context..."></textarea>
+                                </div>
+                                <div class="form-actions full-width">
+                                    <button type="button" class="btn btn-outline" id="cancel-task">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-plus"></i>
+                                        Add Task
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Advanced Filters and Search -->
+                    <div class="task-controls">
+                        <div class="search-container">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input type="text" id="task-search" placeholder="Search tasks..." 
+                                   aria-label="Search tasks">
+                        </div>
+                        
+                        <div class="filter-container">
+                            <div class="filter-group">
+                                <label>Status:</label>
+                                <div class="filter-buttons" role="group" aria-label="Filter by Status">
+                                    <button class="filter-btn active" data-filter="all">All</button>
+                                    <button class="filter-btn" data-filter="pending">Pending</button>
+                                    <button class="filter-btn" data-filter="in-progress">In Progress</button>
+                                    <button class="filter-btn" data-filter="completed">Completed</button>
+                                    <button class="filter-btn" data-filter="overdue">Overdue</button>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label>Priority:</label>
+                                <div class="filter-buttons" role="group" aria-label="Filter by Priority">
+                                    <button class="priority-filter active" data-priority="all">All</button>
+                                    <button class="priority-filter urgent" data-priority="urgent">Urgent</button>
+                                    <button class="priority-filter high" data-priority="high">High</button>
+                                    <button class="priority-filter medium" data-priority="medium">Medium</button>
+                                    <button class="priority-filter low" data-priority="low">Low</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sort-container">
+                            <label for="task-sort" class="sr-only">Sort Tasks</label>
+                            <select id="task-sort">
+                                <option value="created">Sort by Created</option>
+                                <option value="priority">Sort by Priority</option>
+                                <option value="due-date">Sort by Due Date</option>
+                                <option value="alphabetical">Sort Alphabetically</option>
+                                <option value="category">Sort by Category</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Task List Container -->
+                    <div class="task-list-container">
+                        <div id="task-list" class="task-list list-view" role="region" aria-label="Task List"></div>
+                        <div class="task-list-empty" id="task-list-empty">
+                            <div class="empty-state">
+                                <i class="fas fa-tasks" aria-hidden="true"></i>
+                                <h3>No tasks found</h3>
+                                <p>Create your first task to get started with productivity tracking</p>
+                                <button class="btn btn-primary" onclick="document.getElementById('add-task-btn').click()">
+                                    <i class="fas fa-plus"></i>
+                                    Add Your First Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Expense Tracker Section -->
+        <section id="expenses" class="section expenses-section" role="tabpanel" aria-labelledby="expenses-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 id="expenses-title" class="section-title">Expense Tracker</h2>
+                        <p class="section-subtitle">Monitor your spending and manage your budget with detailed insights</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn btn-outline" id="import-expenses">
+                            <i class="fas fa-upload"></i>
+                            Import CSV
+                        </button>
+                        <button class="btn btn-outline" id="export-expenses">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                        <button class="btn btn-primary" id="add-expense-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Expense
+                        </button>
+                    </div>
+                </div>
+
+                <div class="expense-manager">
+                    <!-- Expense Summary Cards -->
+                    <div class="expense-summary" role="region" aria-label="Expense Summary">
+                        <div class="summary-card">
+                            <div class="summary-icon" aria-hidden="true">
+                                <i class="fas fa-calendar-week"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h4 id="week-expenses">$0</h4>
+                                <p>This Week</p>
+                                <span class="summary-change positive" id="week-change">+0%</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon" aria-hidden="true">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h4 id="month-expenses">$0</h4>
+                                <p>This Month</p>
+                                <span class="summary-change neutral" id="month-change">+0%</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon" aria-hidden="true">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h4 id="avg-daily">$0</h4>
+                                <p>Daily Average</p>
+                                <span class="summary-change neutral" id="avg-change">+0%</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon" aria-hidden="true">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h4 id="budget-remaining">$2,000</h4>
+                                <p>Budget Left</p>
+                                <span class="summary-change positive" id="budget-change">100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Expense Input -->
+                    <div class="expense-input-container" id="expense-input-container">
+                        <form id="expense-form" class="expense-form" novalidate>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="expense-description">Description *</label>
+                                    <input type="text" id="expense-description" placeholder="What did you spend on?" required
+                                           aria-describedby="expense-description-error">
+                                    <span class="error-message" id="expense-description-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-amount">Amount *</label>
+                                    <div class="amount-input">
+                                        <span class="currency-symbol">$</span>
+                                        <input type="number" id="expense-amount" placeholder="0.00" step="0.01" required
+                                               aria-describedby="expense-amount-error">
+                                    </div>
+                                    <span class="error-message" id="expense-amount-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-category">Category *</label>
+                                    <select id="expense-category" required aria-describedby="expense-category-error">
+                                        <option value="">Select Category</option>
+                                        <option value="food">🍔 Food & Dining</option>
+                                        <option value="transport">🚗 Transportation</option>
+                                        <option value="shopping">🛍️ Shopping</option>
+                                        <option value="entertainment">🎬 Entertainment</option>
+                                        <option value="bills">💡 Bills & Utilities</option>
+                                        <option value="health">🏥 Healthcare</option>
+                                        <option value="education">📚 Education</option>
+                                        <option value="travel">✈️ Travel</option>
+                                        <option value="subscriptions">📱 Subscriptions</option>
+                                        <option value="gifts">🎁 Gifts</option>
+                                        <option value="other">📦 Other</option>
+                                    </select>
+                                    <span class="error-message" id="expense-category-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-date">Date *</label>
+                                    <input type="date" id="expense-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-payment">Payment Method</label>
+                                    <select id="expense-payment">
+                                        <option value="cash">💵 Cash</option>
+                                        <option value="credit-card">💳 Credit Card</option>
+                                        <option value="debit-card">💳 Debit Card</option>
+                                        <option value="digital-wallet">📱 Digital Wallet</option>
+                                        <option value="bank-transfer">🏦 Bank Transfer</option>
+                                        <option value="check">📝 Check</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-recurring">Recurring</label>
+                                    <select id="expense-recurring">
+                                        <option value="none">One-time</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="expense-notes">Notes (Optional)</label>
+                                    <textarea id="expense-notes" placeholder="Additional details, receipt number, etc..."></textarea>
+                                </div>
+                                <div class="form-actions full-width">
+                                    <button type="button" class="btn btn-outline" id="cancel-expense">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-plus"></i>
+                                        Add Expense
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Expense Filters -->
+                    <div class="expense-controls">
+                        <div class="search-container">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input type="text" id="expense-search" placeholder="Search expenses..." 
+                                   aria-label="Search expenses">
+                        </div>
+                        
+                        <div class="filter-container">
+                            <select id="expense-category-filter" aria-label="Filter by Category">
+                                <option value="all">All Categories</option>
+                                <option value="food">Food & Dining</option>
+                                <option value="transport">Transportation</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="bills">Bills & Utilities</option>
+                                <option value="health">Healthcare</option>
+                                <option value="education">Education</option>
+                                <option value="travel">Travel</option>
+                                <option value="subscriptions">Subscriptions</option>
+                                <option value="gifts">Gifts</option>
+                                <option value="other">Other</option>
+                            </select>
+                            
+                            <select id="expense-date-filter" aria-label="Filter by Date Range">
+                                <option value="all">All Time</option>
+                                <option value="today">Today</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="quarter">This Quarter</option>
+                                <option value="year">This Year</option>
+                            </select>
+                            
+                            <select id="expense-amount-filter" aria-label="Filter by Amount Range">
+                                <option value="all">All Amounts</option>
+                                <option value="0-25">$0 - $25</option>
+                                <option value="25-100">$25 - $100</option>
+                                <option value="100-500">$100 - $500</option>
+                                <option value="500+">$500+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Expense List -->
+                    <div class="expense-list-container">
+                        <div id="expense-list" class="expense-list" role="region" aria-label="Expense List"></div>
+                        <div class="expense-list-empty" id="expense-list-empty">
+                            <div class="empty-state">
+                                <i class="fas fa-wallet" aria-hidden="true"></i>
+                                <h3>No expenses recorded</h3>
+                                <p>Start tracking your expenses to better manage your budget and gain insights into your spending patterns</p>
+                                <button class="btn btn-primary" onclick="document.getElementById('add-expense-btn').click()">
+                                    <i class="fas fa-plus"></i>
+                                    Add Your First Expense
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section analytics-section" role="tabpanel" aria-labelledby="analytics-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 id="analytics-title" class="section-title">Analytics & Insights</h2>
+                        <p class="section-subtitle">Visualize your productivity and spending patterns with advanced analytics</p>
+                    </div>
+                    <div class="section-actions">
+                        <select id="analytics-period" aria-label="Analytics Time Period">
+                            <option value="week">This Week</option>
+                            <option value="month" selected>This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                        <button class="btn btn-outline" id="export-analytics">
+                            <i class="fas fa-download"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <!-- Task Analytics -->
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Task Completion Trends</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Refresh Chart" aria-label="Refresh Chart">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Fullscreen" aria-label="View Fullscreen">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="task-trend-chart" aria-label="Task completion trend over time"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color completed"></span>
+                                <span>Completed</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color pending"></span>
+                                <span>Pending</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expense Analytics -->
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Expense Categories</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Export Chart" aria-label="Export Chart">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="Chart Settings" aria-label="Chart Settings">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="expense-pie-chart" aria-label="Expense distribution by category"></canvas>
+                        </div>
+                        <div class="expense-breakdown-list" id="expense-breakdown-list">
+                            <!-- Breakdown items will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Productivity Score -->
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Productivity Score</h3>
+                            <div class="score-badge">
+                                <span id="productivity-score">85</span>
+                                <small>/100</small>
+                            </div>
+                        </div>
+                        <div class="score-breakdown">
+                            <div class="score-item">
+                                <span class="score-label">Task Completion</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 85%" data-score="85"></div>
+                                </div>
+                                <span class="score-value">85%</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-label">Budget Adherence</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 72%" data-score="72"></div>
+                                </div>
+                                <span class="score-value">72%</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-label">Consistency</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90%" data-score="90"></div>
+                                </div>
+                                <span class="score-value">90%</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-label">Goal Achievement</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 78%" data-score="78"></div>
+                                </div>
+                                <span class="score-value">78%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Comparison -->
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Monthly Comparison</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="View Details" aria-label="View Details">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="monthly-comparison-chart" aria-label="Monthly expense and task comparison"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Insights -->
+                    <div class="analytics-card insights-card">
+                        <div class="card-header">
+                            <h3>Smart Insights</h3>
+                            <div class="insights-icon" aria-hidden="true">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                        </div>
+                        <div class="insights-list" id="insights-list">
+                            <div class="insight-item">
+                                <div class="insight-icon positive" aria-hidden="true">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Great Progress!</h4>
+                                    <p>You've completed 23% more tasks this week compared to last week. Keep up the excellent work!</p>
+                                    <span class="insight-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-icon warning" aria-hidden="true">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Budget Alert</h4>
+                                    <p>You're spending 15% more on food this month. Consider meal planning to optimize your budget.</p>
+                                    <span class="insight-time">1 day ago</span>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-icon info" aria-hidden="true">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Peak Productivity</h4>
+                                    <p>Your most productive time is between 9 AM - 11 AM. Schedule important tasks during this window.</p>
+                                    <span class="insight-time">3 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="section reports-section" role="tabpanel" aria-labelledby="reports-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 id="reports-title" class="section-title">Reports & Export</h2>
+                        <p class="section-subtitle">Generate detailed reports and export your data in various formats</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn btn-outline" id="schedule-report">
+                            <i class="fas fa-calendar-plus"></i>
+                            Schedule Report
+                        </button>
+                        <button class="btn btn-primary" id="generate-report">
+                            <i class="fas fa-file-alt"></i>
+                            Generate Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="report-content">
+                            <h3>Task Summary Report</h3>
+                            <p>Comprehensive overview of task completion, productivity metrics, and time tracking</p>
+                            <div class="report-actions">
+                                <button class="btn btn-outline btn-sm" data-report="task-summary">
+                                    <i class="fas fa-eye"></i>
+                                    Preview
+                                </button>
+                                <button class="btn btn-primary btn-sm" data-export="task-summary">
+                                    <i class="fas fa-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="report-content">
+                            <h3>Expense Analysis</h3>
+                            <p>Detailed breakdown of spending patterns, budget analysis, and financial insights</p>
+                            <div class="report-actions">
+                                <button class="btn btn-outline btn-sm" data-report="expense-analysis">
+                                    <i class="fas fa-eye"></i>
+                                    Preview
+                                </button>
+                                <button class="btn btn-primary btn-sm" data-export="expense-analysis">
+                                    <i class="fas fa-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="report-content">
+                            <h3>Monthly Dashboard</h3>
+                            <p>Complete monthly overview combining tasks, expenses, and productivity metrics</p>
+                            <div class="report-actions">
+                                <button class="btn btn-outline btn-sm" data-report="monthly-dashboard">
+                                    <i class="fas fa-eye"></i>
+                                    Preview
+                                </button>
+                                <button class="btn btn-primary btn-sm" data-export="monthly-dashboard">
+                                    <i class="fas fa-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="report-content">
+                            <h3>Data Backup</h3>
+                            <p>Complete backup of all your data including tasks, expenses, and settings</p>
+                            <div class="report-actions">
+                                <button class="btn btn-outline btn-sm" data-report="data-backup">
+                                    <i class="fas fa-eye"></i>
+                                    Preview
+                                </button>
+                                <button class="btn btn-primary btn-sm" data-export="data-backup">
+                                    <i class="fas fa-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Contact Form Section -->
+        <section id="contact" class="section contact-section" role="tabpanel" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 id="contact-title" class="section-title">Get in Touch</h2>
+                        <p class="section-subtitle">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    </div>
+                </div>
+
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-header">
+                                <h3>Contact Information</h3>
+                                <p>Say something to start a live chat!</p>
+                            </div>
+                            
+                            <div class="contact-items">
+                                <div class="contact-item">
+                                    <div class="contact-icon" aria-hidden="true">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Phone</span>
+                                        <span class="contact-value">+1 (555) 123-4567</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon" aria-hidden="true">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Email</span>
+                                        <span class="contact-value">support@productivityhub.com</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon" aria-hidden="true">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Address</span>
+                                        <span class="contact-value">132 Dartmouth Street<br>Boston, Massachusetts 02156<br>United States</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon" aria-hidden="true">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Business Hours</span>
+                                        <span class="contact-value">Mon - Fri: 9:00 AM - 6:00 PM EST<br>Sat - Sun: 10:00 AM - 4:00 PM EST</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="social-links">
+                                <a href="#" class="social-link" aria-label="Follow us on Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Follow us on Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Join our Discord">
+                                    <i class="fab fa-discord"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Connect on LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <form id="contact-form" class="contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contact-first-name">First Name *</label>
+                                    <input type="text" id="contact-first-name" name="firstName" required
+                                           aria-describedby="first-name-error">
+                                    <span class="error-message" id="first-name-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="contact-last-name">Last Name *</label>
+                                    <input type="text" id="contact-last-name" name="lastName" required
+                                           aria-describedby="last-name-error">
+                                    <span class="error-message" id="last-name-error"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contact-email">Email Address *</label>
+                                    <input type="email" id="contact-email" name="email" required
+                                           aria-describedby="email-error">
+                                    <span class="error-message" id="email-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="contact-phone">Phone Number</label>
+                                    <input type="tel" id="contact-phone" name="phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <select id="contact-subject" name="subject">
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="feature">Feature Request</option>
+                                    <option value="bug">Bug Report</option>
+                                    <option value="billing">Billing Question</option>
+                                    <option value="partnership">Partnership Inquiry</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-message">Message *</label>
+                                <textarea id="contact-message" name="message" rows="6" 
+                                         placeholder="Write your message..." required
+                                         aria-describedby="message-error"></textarea>
+                                <span class="error-message" id="message-error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="contact-newsletter" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    I'd like to receive updates about new features and productivity tips
+                                </label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="contact-privacy" name="privacy" required>
+                                    <span class="checkmark"></span>
+                                    I agree to the <a href="#" target="_blank">Privacy Policy</a> and <a href="#" target="_blank">Terms of Service</a> *
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="brand-icon" aria-hidden="true">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="brand-text">
+                            <h3>ProductivityHub Pro</h3>
+                            <p>Empowering productivity through intelligent task and expense management. Transform your daily workflow with our comprehensive productivity suite.</p>
+                        </div>
+                    </div>
+                    <div class="footer-newsletter">
+                        <h4>Stay Updated</h4>
+                        <form class="newsletter-form" id="newsletter-form">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                        <li><a href="#">Enterprise</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">System Status</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                        <li><a href="#">Video Tutorials</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Investors</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2025 ProductivityHub Pro. All rights reserved.</p>
+                    <p class="footer-tagline">Built with ❤️ for productivity enthusiasts worldwide | Surekha Koti </p>
+                </div>
+                <div class="footer-bottom-right">
+                    <div class="footer-social">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Modals -->
+    <div id="success-modal" class="modal" role="dialog" aria-labelledby="success-modal-title" aria-hidden="true">
+        <div class="modal-content success-modal">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-icon" aria-hidden="true">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 id="success-modal-title">Success!</h3>
+            <p id="success-message">Your message has been sent successfully!</p>
+            <button class="btn btn-primary" onclick="closeModal('success-modal')">
+                Got it
+            </button>
+        </div>
+    </div>
+
+    <!-- Task Detail Modal -->
+    <div id="task-detail-modal" class="modal" role="dialog" aria-labelledby="task-detail-title" aria-hidden="true">
+        <div class="modal-content task-modal">
+            <div class="modal-header">
+                <h3 id="task-detail-title">Task Details</h3>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="task-detail-content">
+                <!-- Task details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Expense Detail Modal -->
+    <div id="expense-detail-modal" class="modal" role="dialog" aria-labelledby="expense-detail-title" aria-hidden="true">
+        <div class="modal-content expense-modal">
+            <div class="modal-header">
+                <h3 id="expense-detail-title">Expense Details</h3>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="expense-detail-content">
+                <!-- Expense details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal" role="dialog" aria-labelledby="settings-title" aria-hidden="true">
+        <div class="modal-content settings-modal">
+            <div class="modal-header">
+                <h3 id="settings-title">Settings</h3>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h4>Appearance</h4>
+                    <div class="setting-item">
+                        <label for="theme-setting">Theme</label>
+                        <select id="theme-setting">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="auto">Auto</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4>Notifications</h4>
+                    <div class="setting-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="task-notifications" checked>
+                            <span class="checkmark"></span>
+                            Task reminders
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="budget-notifications" checked>
+                            <span class="checkmark"></span>
+                            Budget alerts
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+    <!-- Notification Panel -->
+    <div id="notification-panel" class="notification-panel" role="region" aria-label="Notifications">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="btn btn-outline btn-sm" id="mark-all-read">Mark All Read</button>
+        </div>
+        <div class="notification-list" id="notification-list">
+            <!-- Notifications will be populated here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>
